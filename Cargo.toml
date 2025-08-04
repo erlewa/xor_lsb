@@ -1,5 +1,5 @@
 [package]
-name = "xor_least_signifigant"
+name = "xor_lsb"
 version = "0.1.0"
 edition = "2024"
 

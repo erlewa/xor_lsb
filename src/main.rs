@@ -10,31 +10,40 @@ fn main() {
     xor_img();
 }
 
-/// xor the least signifigant bit of every pixel in an image
+/// xor the least signifigant bit of every channel in every pixel of an image
 fn xor_img() {
+
+    //////////////////
+    // Verify Usage //
+    //////////////////
 
     let args: Vec<String> = env::args().collect();
     if args.len() != 2 {
         eprintln!("USAGE: {:?} /path/to/img", args[0]);
         return;
     }
-    // Load original image into memory
+
+    //////////////////////////
+    // Load Original Image  //
+    //////////////////////////
+    
     let img: ImageBuffer<Rgb<u16>, Vec<u16>> = ImageReader::open(args[1].clone())
         .unwrap()
         .decode()
         .unwrap()
         .to_rgb16();
 
-    /////////////////////
-    //  set up canvas  //
-    /////////////////////
+    ///////////////////////
+    //  Write New Image  //
+    ///////////////////////
 
     let mut new_img: ImageBuffer<Rgb<u16>, Vec<u16>> = ImageBuffer::new(img.width(), img.height());
 
     for x in 0..new_img.width() {
         for y in 0..new_img.height() {
             let pixel = img.get_pixel(x, y);
-            // Write the old image to the new image with an flipped LSB in every channel
+            // Write the old image to the new image with 
+            // a flipped LSB in every channel
             new_img.put_pixel(
                 x,
                 y,
@@ -47,6 +56,10 @@ fn xor_img() {
             );
         }
     }
+
+    ///////////////////////////////
+    //  Print Old vs New Pixels  //
+    ///////////////////////////////
 
     for x in 0..5 {
         let old_pixel = img.get_pixel(x, 1);
