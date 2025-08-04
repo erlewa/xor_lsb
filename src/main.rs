@@ -64,9 +64,9 @@ fn xor_img() {
     for x in 0..5 {
         let old_pixel = img.get_pixel(x, 1);
         let new_pixel = new_img.get_pixel(x, 1);
-
+        println!("Pixel {x}");
         println!("Old Pixel: {:X} {:X} {:X}", old_pixel.0[0], old_pixel.0[1], old_pixel.0[2]);
-        println!("New Pixel: {:X} {:X} {:X}", new_pixel.0[0], new_pixel.0[1], new_pixel.0[2]);
+        println!("New Pixel: {:X} {:X} {:X}\n", new_pixel.0[0], new_pixel.0[1], new_pixel.0[2]);
     }
 
     let _ = new_img.save("out.png");
